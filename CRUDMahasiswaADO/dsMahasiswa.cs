@@ -17,5 +17,8 @@ namespace CRUDMahasiswaADO
 
     partial class dsMahasiswa
     {
+        partial class MahasiswaDataTable
+        {
+        }
     }
 }

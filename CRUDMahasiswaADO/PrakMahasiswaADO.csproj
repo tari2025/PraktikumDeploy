@@ -200,6 +200,7 @@
     <None Include="dsMahasiswa.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsMahasiswa1.Designer.cs</LastGenOutput>
     </None>
     <None Include="dsMahasiswa.xss">
       <DependentUpon>dsMahasiswa.xsd</DependentUpon>

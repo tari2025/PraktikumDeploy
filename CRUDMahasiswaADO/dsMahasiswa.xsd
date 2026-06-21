@@ -9,17 +9,17 @@
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="dsMahasiswa" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="dsMahasiswa" msprop:Generator_DataSetName="dsMahasiswa">
+  <xs:element name="dsMahasiswa" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsMahasiswa" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsMahasiswa">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Mahasiswa" msprop:Generator_RowEvHandlerName="MahasiswaRowChangeEventHandler" msprop:Generator_RowDeletedName="MahasiswaRowDeleted" msprop:Generator_RowDeletingName="MahasiswaRowDeleting" msprop:Generator_RowEvArgName="MahasiswaRowChangeEvent" msprop:Generator_TablePropName="Mahasiswa" msprop:Generator_RowChangedName="MahasiswaRowChanged" msprop:Generator_RowChangingName="MahasiswaRowChanging" msprop:Generator_TableClassName="MahasiswaDataTable" msprop:Generator_RowClassName="MahasiswaRow" msprop:Generator_TableVarName="tableMahasiswa" msprop:Generator_UserTableName="Mahasiswa">
+        <xs:element name="Mahasiswa" msprop:Generator_RowClassName="MahasiswaRow" msprop:Generator_RowEvHandlerName="MahasiswaRowChangeEventHandler" msprop:Generator_RowDeletedName="MahasiswaRowDeleted" msprop:Generator_RowDeletingName="MahasiswaRowDeleting" msprop:Generator_RowEvArgName="MahasiswaRowChangeEvent" msprop:Generator_TablePropName="Mahasiswa" msprop:Generator_RowChangedName="MahasiswaRowChanged" msprop:Generator_UserTableName="Mahasiswa" msprop:Generator_RowChangingName="MahasiswaRowChanging" msprop:Generator_TableClassName="MahasiswaDataTable" msprop:Generator_TableVarName="tableMahasiswa">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Nama" msprop:Generator_ColumnPropNameInRow="Nama" msprop:Generator_ColumnPropNameInTable="NamaColumn" msprop:Generator_ColumnVarNameInTable="columnNama" msprop:Generator_UserColumnName="Nama" type="xs:string" minOccurs="0" />
-              <xs:element name="JenisKelamin" msprop:Generator_ColumnPropNameInRow="JenisKelamin" msprop:Generator_ColumnPropNameInTable="JenisKelaminColumn" msprop:Generator_ColumnVarNameInTable="columnJenisKelamin" msprop:Generator_UserColumnName="JenisKelamin" type="xs:string" minOccurs="0" />
-              <xs:element name="Alamat" msprop:Generator_ColumnPropNameInRow="Alamat" msprop:Generator_ColumnPropNameInTable="AlamatColumn" msprop:Generator_ColumnVarNameInTable="columnAlamat" msprop:Generator_UserColumnName="Alamat" type="xs:string" minOccurs="0" />
-              <xs:element name="NamaProdi" msprop:Generator_ColumnPropNameInRow="NamaProdi" msprop:Generator_ColumnPropNameInTable="NamaProdiColumn" msprop:Generator_ColumnVarNameInTable="columnNamaProdi" msprop:Generator_UserColumnName="NamaProdi" type="xs:string" minOccurs="0" />
-              <xs:element name="TanggalDatfar" msprop:Generator_ColumnPropNameInRow="TanggalDatfar" msprop:Generator_ColumnPropNameInTable="TanggalDatfarColumn" msprop:Generator_ColumnVarNameInTable="columnTanggalDatfar" msprop:Generator_UserColumnName="TanggalDatfar" type="xs:string" minOccurs="0" />
+              <xs:element name="Nama" msprop:Generator_UserColumnName="Nama" msprop:Generator_ColumnPropNameInTable="NamaColumn" msprop:Generator_ColumnPropNameInRow="Nama" msprop:Generator_ColumnVarNameInTable="columnNama" type="xs:string" minOccurs="0" />
+              <xs:element name="JenisKelamin" msprop:Generator_UserColumnName="JenisKelamin" msprop:Generator_ColumnPropNameInTable="JenisKelaminColumn" msprop:Generator_ColumnPropNameInRow="JenisKelamin" msprop:Generator_ColumnVarNameInTable="columnJenisKelamin" type="xs:string" minOccurs="0" />
+              <xs:element name="Alamat" msprop:Generator_UserColumnName="Alamat" msprop:Generator_ColumnPropNameInTable="AlamatColumn" msprop:Generator_ColumnPropNameInRow="Alamat" msprop:Generator_ColumnVarNameInTable="columnAlamat" type="xs:string" minOccurs="0" />
+              <xs:element name="NamaProdi" msprop:Generator_UserColumnName="NamaProdi" msprop:Generator_ColumnPropNameInTable="NamaProdiColumn" msprop:Generator_ColumnPropNameInRow="NamaProdi" msprop:Generator_ColumnVarNameInTable="columnNamaProdi" type="xs:string" minOccurs="0" />
+              <xs:element name="TanggalDatfar" msprop:Generator_UserColumnName="TanggalDatfar" msprop:Generator_ColumnPropNameInTable="TanggalDatfarColumn" msprop:Generator_ColumnPropNameInRow="TanggalDatfar" msprop:Generator_ColumnVarNameInTable="columnTanggalDatfar" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
