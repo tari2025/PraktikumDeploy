@@ -353,13 +353,14 @@ namespace CRUDMahasiswaADO
             // 
             // btnDelete
             // 
+            this.btnDelete.BackColor = System.Drawing.SystemColors.Info;
             this.btnDelete.Location = new System.Drawing.Point(15, 205);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(135, 46);
             this.btnDelete.TabIndex = 21;
             this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnResetData
@@ -376,13 +377,14 @@ namespace CRUDMahasiswaADO
             // 
             // btnTestInjection
             // 
+            this.btnTestInjection.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.btnTestInjection.Location = new System.Drawing.Point(165, 154);
             this.btnTestInjection.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnTestInjection.Name = "btnTestInjection";
             this.btnTestInjection.Size = new System.Drawing.Size(135, 46);
             this.btnTestInjection.TabIndex = 23;
             this.btnTestInjection.Text = "Test Injection";
-            this.btnTestInjection.UseVisualStyleBackColor = true;
+            this.btnTestInjection.UseVisualStyleBackColor = false;
             this.btnTestInjection.Click += new System.EventHandler(this.btnTestInjection_Click);
             // 
             // btnRefresh
@@ -485,6 +487,7 @@ namespace CRUDMahasiswaADO
             // 
             // btnRekapData
             // 
+            this.btnRekapData.BackColor = System.Drawing.Color.Peru;
             this.btnRekapData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRekapData.Location = new System.Drawing.Point(55, 241);
             this.btnRekapData.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -492,7 +495,7 @@ namespace CRUDMahasiswaADO
             this.btnRekapData.Size = new System.Drawing.Size(135, 46);
             this.btnRekapData.TabIndex = 28;
             this.btnRekapData.Text = "Rekap Data";
-            this.btnRekapData.UseVisualStyleBackColor = true;
+            this.btnRekapData.UseVisualStyleBackColor = false;
             this.btnRekapData.Click += new System.EventHandler(this.btnRekapData_Click);
             // 
             // grpFoto
