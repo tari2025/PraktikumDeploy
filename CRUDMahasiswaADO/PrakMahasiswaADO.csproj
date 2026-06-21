@@ -136,7 +136,7 @@
     <Compile Include="dsMahasiswa.cs">
       <DependentUpon>dsMahasiswa.xsd</DependentUpon>
     </Compile>
-    <Compile Include="dsMahasiswa.Designer.cs">
+    <Compile Include="dsMahasiswa1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsMahasiswa.xsd</DependentUpon>
