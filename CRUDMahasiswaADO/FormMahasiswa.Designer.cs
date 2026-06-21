@@ -364,13 +364,14 @@ namespace CRUDMahasiswaADO
             // 
             // btnResetData
             // 
+            this.btnResetData.BackColor = System.Drawing.Color.Salmon;
             this.btnResetData.Location = new System.Drawing.Point(15, 154);
             this.btnResetData.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnResetData.Name = "btnResetData";
             this.btnResetData.Size = new System.Drawing.Size(135, 46);
             this.btnResetData.TabIndex = 22;
             this.btnResetData.Text = "Reset Data";
-            this.btnResetData.UseVisualStyleBackColor = true;
+            this.btnResetData.UseVisualStyleBackColor = false;
             this.btnResetData.Click += new System.EventHandler(this.btnResetData_Click);
             // 
             // btnTestInjection
