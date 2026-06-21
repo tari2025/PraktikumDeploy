@@ -310,7 +310,31 @@ namespace CRUDMahasiswaADO
                                 string alamat = worksheet.Cells[row, 3].Text?.Trim();
                                 string jk = worksheet.Cells[row, 4].Text?.Trim();
                                 string tanggalLahir = worksheet.Cells[row, 5].Text?.Trim();
-                                string kodeProdi = worksheet.Cells[row, 6].Text?.Trim();
+                                string namaProdi = worksheet.Cells[row, 6].Text?.Trim();
+                                string kodeProdi = "";
+
+                                switch (namaProdi)
+                                {
+                                    case "Sistem Informasi":
+                                        kodeProdi = "SI01";
+                                        break;
+
+                                    case "Manajemen Informatika":
+                                        kodeProdi = "MI01";
+                                        break;
+
+                                    case "Teknik Informatika":
+                                        kodeProdi = "TI01";
+                                        break;
+
+                                    case "Teknologi Informasi":
+                                        kodeProdi = "TI02";
+                                        break;
+
+                                    default:
+                                        kodeProdi = "SI01";
+                                        break;
+                                }
 
                                 if (string.IsNullOrEmpty(nim) || string.IsNullOrEmpty(nama))
                                 {
@@ -341,7 +365,7 @@ namespace CRUDMahasiswaADO
                                     cmdUpdate.Parameters.AddWithValue("@JK", string.IsNullOrEmpty(jk) ? "L" : jk);
                                     cmdUpdate.Parameters.AddWithValue("@TglLahir",
                                         DateTime.TryParse(tanggalLahir, out DateTime tgl) ? tgl : DateTime.Now);
-                                    cmdUpdate.Parameters.AddWithValue("@KodeProdi", string.IsNullOrEmpty(kodeProdi) ? "IF01" : kodeProdi);
+                                    cmdUpdate.Parameters.AddWithValue("@KodeProdi", kodeProdi);
 
                                     cmdUpdate.ExecuteNonQuery();
                                 }
@@ -358,7 +382,7 @@ namespace CRUDMahasiswaADO
                                     cmdInsert.Parameters.AddWithValue("@JK", string.IsNullOrEmpty(jk) ? "L" : jk);
                                     cmdInsert.Parameters.AddWithValue("@TglLahir",
                                         DateTime.TryParse(tanggalLahir, out DateTime tgl) ? tgl : DateTime.Now);
-                                    cmdInsert.Parameters.AddWithValue("@KodeProdi", string.IsNullOrEmpty(kodeProdi) ? "IF01" : kodeProdi);
+                                    cmdInsert.Parameters.AddWithValue("@KodeProdi", kodeProdi);
 
                                     cmdInsert.ExecuteNonQuery();
                                 }

@@ -287,7 +287,7 @@ namespace CRUDMahasiswaADO {
             
             private global::System.Data.DataColumn columnNamaProdi;
             
-            private global::System.Data.DataColumn columnTanggalDatfar;
+            private global::System.Data.DataColumn columnTanggalDaftar;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -356,9 +356,9 @@ namespace CRUDMahasiswaADO {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn TanggalDatfarColumn {
+            public global::System.Data.DataColumn TanggalDaftarColumn {
                 get {
-                    return this.columnTanggalDatfar;
+                    return this.columnTanggalDaftar;
                 }
             }
             
@@ -399,14 +399,14 @@ namespace CRUDMahasiswaADO {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public MahasiswaRow AddMahasiswaRow(string Nama, string JenisKelamin, string Alamat, string NamaProdi, string TanggalDatfar) {
+            public MahasiswaRow AddMahasiswaRow(string Nama, string JenisKelamin, string Alamat, string NamaProdi, string TanggalDaftar) {
                 MahasiswaRow rowMahasiswaRow = ((MahasiswaRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Nama,
                         JenisKelamin,
                         Alamat,
                         NamaProdi,
-                        TanggalDatfar};
+                        TanggalDaftar};
                 rowMahasiswaRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMahasiswaRow);
                 return rowMahasiswaRow;
@@ -433,7 +433,7 @@ namespace CRUDMahasiswaADO {
                 this.columnJenisKelamin = base.Columns["JenisKelamin"];
                 this.columnAlamat = base.Columns["Alamat"];
                 this.columnNamaProdi = base.Columns["NamaProdi"];
-                this.columnTanggalDatfar = base.Columns["TanggalDatfar"];
+                this.columnTanggalDaftar = base.Columns["TanggalDaftar"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -447,8 +447,8 @@ namespace CRUDMahasiswaADO {
                 base.Columns.Add(this.columnAlamat);
                 this.columnNamaProdi = new global::System.Data.DataColumn("NamaProdi", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNamaProdi);
-                this.columnTanggalDatfar = new global::System.Data.DataColumn("TanggalDatfar", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTanggalDatfar);
+                this.columnTanggalDaftar = new global::System.Data.DataColumn("TanggalDaftar", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTanggalDaftar);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -655,17 +655,17 @@ namespace CRUDMahasiswaADO {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string TanggalDatfar {
+            public string TanggalDaftar {
                 get {
                     try {
-                        return ((string)(this[this.tableMahasiswa.TanggalDatfarColumn]));
+                        return ((string)(this[this.tableMahasiswa.TanggalDaftarColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'TanggalDatfar\' in table \'Mahasiswa\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'TanggalDaftar\' in table \'Mahasiswa\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMahasiswa.TanggalDatfarColumn] = value;
+                    this[this.tableMahasiswa.TanggalDaftarColumn] = value;
                 }
             }
             
@@ -719,14 +719,14 @@ namespace CRUDMahasiswaADO {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsTanggalDatfarNull() {
-                return this.IsNull(this.tableMahasiswa.TanggalDatfarColumn);
+            public bool IsTanggalDaftarNull() {
+                return this.IsNull(this.tableMahasiswa.TanggalDaftarColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetTanggalDatfarNull() {
-                this[this.tableMahasiswa.TanggalDatfarColumn] = global::System.Convert.DBNull;
+            public void SetTanggalDaftarNull() {
+                this[this.tableMahasiswa.TanggalDaftarColumn] = global::System.Convert.DBNull;
             }
         }
         

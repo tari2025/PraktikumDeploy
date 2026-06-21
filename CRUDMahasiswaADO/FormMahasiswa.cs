@@ -18,6 +18,7 @@ namespace CRUDMahasiswaADO
 
         private void FormMahasiswa_Load(object sender, EventArgs e)
         {
+
             LoadData();
             LoadProdiCombo();
             bindingNavigator1.BindingSource = bindingSource;
@@ -31,15 +32,12 @@ namespace CRUDMahasiswaADO
             btnImportExcel.Visible = true;
             btnImportDatabase.Visible = true;
         }
-        private void btnImportExcel_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Klik terdeteksi");
-        }
         private void LoadProdiCombo()
         {
             try
             {
                 DataTable dtProdi = dbLogic.getProdi();
+
                 cmbProdi.DataSource = dtProdi;
                 cmbProdi.DisplayMember = "NamaProdi";
                 cmbProdi.ValueMember = "KodeProdi";
@@ -47,7 +45,38 @@ namespace CRUDMahasiswaADO
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error load Prodi: " + ex.Message);
+                MessageBox.Show("Error load prodi: " + ex.Message);
+            }
+        }
+        private void btnImportExcel_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            ofd.Title = "Pilih File Excel";
+            ofd.Filter = "Excel Files (*.xlsx)|*.xlsx";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    dbLogic.ImportExcel(ofd.FileName);
+
+                    MessageBox.Show(
+                        "Data Excel berhasil diimport!",
+                        "Sukses",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                    LoadData();   // refresh DataGridView
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -413,43 +442,24 @@ namespace CRUDMahasiswaADO
         {
             try
             {
-                DialogResult confirm = MessageBox.Show(
-                    "Yakin ingin mengimport data dari database backup?\n\n" +
-                    "DATA YANG ADA AKAN DIHAPUS DAN DIGANTI DENGAN DATA DARI BACKUP!",
-                    "Konfirmasi Import Database",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning);
+                dbLogic.ImportFromDatabase();
 
-                if (confirm == DialogResult.Yes)
-                {
-                    Cursor = Cursors.WaitCursor;
-                    btnImportDatabase.Enabled = false;
+                MessageBox.Show(
+                    "Data berhasil diimport dari database backup!",
+                    "Sukses",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
 
-                    try
-                    {
-                        dbLogic.ImportFromDatabase();
-
-                        MessageBox.Show("Data berhasil diimport dari database backup!",
-                            "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        dbLogic.insertLog("Import data dari database backup");
-                    }
-                    finally
-                    {
-                        Cursor = Cursors.Default;
-                        btnImportDatabase.Enabled = true;
-                    }
-
-                    LoadData();
-                    ClearForm();
-                }
+                LoadData();
+                ClearForm();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error Import Database: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                btnImportDatabase.Enabled = true;
-                Cursor = Cursors.Default;
+                MessageBox.Show(
+                    "Error Import Database : " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
