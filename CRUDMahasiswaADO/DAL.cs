@@ -4,6 +4,8 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using OfficeOpenXml;
 using System.IO;
+using System.Net;           
+using System.Net.Sockets;
 
 namespace CRUDMahasiswaADO
 {

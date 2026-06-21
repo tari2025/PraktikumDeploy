@@ -62,8 +62,8 @@ namespace CRUDMahasiswaADO
             this.grpButton = new System.Windows.Forms.GroupBox();
             this.btnImportDatabase = new System.Windows.Forms.Button();
             this.btnImportExcel = new System.Windows.Forms.Button();
-            this.grpFoto = new System.Windows.Forms.GroupBox();
             this.btnRekapData = new System.Windows.Forms.Button();
+            this.grpFoto = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
@@ -295,7 +295,7 @@ namespace CRUDMahasiswaADO
             // pictureBoxFoto
             // 
             this.pictureBoxFoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxFoto.Location = new System.Drawing.Point(55, 0);
+            this.pictureBoxFoto.Location = new System.Drawing.Point(55, 13);
             this.pictureBoxFoto.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBoxFoto.Name = "pictureBoxFoto";
             this.pictureBoxFoto.Size = new System.Drawing.Size(143, 148);
@@ -329,24 +329,26 @@ namespace CRUDMahasiswaADO
             // 
             // btnInsert
             // 
+            this.btnInsert.BackColor = System.Drawing.Color.MistyRose;
             this.btnInsert.Location = new System.Drawing.Point(15, 92);
             this.btnInsert.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnInsert.Name = "btnInsert";
             this.btnInsert.Size = new System.Drawing.Size(135, 46);
             this.btnInsert.TabIndex = 19;
             this.btnInsert.Text = "Insert";
-            this.btnInsert.UseVisualStyleBackColor = true;
+            this.btnInsert.UseVisualStyleBackColor = false;
             this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
             // 
             // btnUpdate
             // 
+            this.btnUpdate.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnUpdate.Location = new System.Drawing.Point(165, 92);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(135, 46);
             this.btnUpdate.TabIndex = 20;
             this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnDelete
@@ -395,24 +397,21 @@ namespace CRUDMahasiswaADO
             // 
             // btnRekap
             // 
-            this.btnRekapData.Location = new System.Drawing.Point(465, 31);
-            this.btnRekapData.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnRekapData.Name = "btnRekapData";
-            this.btnRekapData.Size = new System.Drawing.Size(135, 46);
-            this.btnRekapData.TabIndex = 25;
-            this.btnRekapData.Text = "Rekap";
-            this.btnRekapData.UseVisualStyleBackColor = true;
-            this.btnRekapData.Click += new System.EventHandler(this.btnRekapData_Click);
+            this.btnRekap.Location = new System.Drawing.Point(0, 0);
+            this.btnRekap.Name = "btnRekap";
+            this.btnRekap.Size = new System.Drawing.Size(75, 23);
+            this.btnRekap.TabIndex = 0;
             // 
             // btnUploadFoto
             // 
-            this.btnUploadFoto.Location = new System.Drawing.Point(30, 185);
+            this.btnUploadFoto.BackColor = System.Drawing.Color.IndianRed;
+            this.btnUploadFoto.Location = new System.Drawing.Point(55, 181);
             this.btnUploadFoto.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnUploadFoto.Name = "btnUploadFoto";
-            this.btnUploadFoto.Size = new System.Drawing.Size(120, 38);
+            this.btnUploadFoto.Size = new System.Drawing.Size(135, 42);
             this.btnUploadFoto.TabIndex = 26;
             this.btnUploadFoto.Text = "Upload Foto";
-            this.btnUploadFoto.UseVisualStyleBackColor = true;
+            this.btnUploadFoto.UseVisualStyleBackColor = false;
             this.btnUploadFoto.Click += new System.EventHandler(this.btnUploadFoto_Click);
             // 
             // grpInput
@@ -450,7 +449,6 @@ namespace CRUDMahasiswaADO
             this.grpButton.Controls.Add(this.btnResetData);
             this.grpButton.Controls.Add(this.btnTestInjection);
             this.grpButton.Controls.Add(this.btnRefresh);
-            this.grpButton.Controls.Add(this.btnRekapData);
             this.grpButton.Location = new System.Drawing.Point(810, 46);
             this.grpButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.grpButton.Name = "grpButton";
@@ -459,6 +457,7 @@ namespace CRUDMahasiswaADO
             this.grpButton.TabIndex = 30;
             this.grpButton.TabStop = false;
             this.grpButton.Text = "Aksi";
+            this.grpButton.Enter += new System.EventHandler(this.grpButton_Enter);
             // 
             // btnImportDatabase
             // 
@@ -483,12 +482,24 @@ namespace CRUDMahasiswaADO
             this.btnImportExcel.UseVisualStyleBackColor = true;
             this.btnImportExcel.Click += new System.EventHandler(this.btnImportExcel_Click);
             // 
+            // btnRekapData
+            // 
+            this.btnRekapData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRekapData.Location = new System.Drawing.Point(55, 241);
+            this.btnRekapData.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnRekapData.Name = "btnRekapData";
+            this.btnRekapData.Size = new System.Drawing.Size(135, 46);
+            this.btnRekapData.TabIndex = 28;
+            this.btnRekapData.Text = "Rekap Data";
+            this.btnRekapData.UseVisualStyleBackColor = true;
+            this.btnRekapData.Click += new System.EventHandler(this.btnRekapData_Click);
+            // 
             // grpFoto
             // 
             this.grpFoto.Controls.Add(this.btnRekapData);
             this.grpFoto.Controls.Add(this.pictureBoxFoto);
             this.grpFoto.Controls.Add(this.btnUploadFoto);
-            this.grpFoto.Location = new System.Drawing.Point(555, 46);
+            this.grpFoto.Location = new System.Drawing.Point(551, 23);
             this.grpFoto.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.grpFoto.Name = "grpFoto";
             this.grpFoto.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -497,17 +508,6 @@ namespace CRUDMahasiswaADO
             this.grpFoto.TabStop = false;
             this.grpFoto.Text = "Foto";
             this.grpFoto.Enter += new System.EventHandler(this.grpFoto_Enter);
-            // 
-            // btnRekapData
-            // 
-            this.btnRekapData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRekapData.Location = new System.Drawing.Point(30, 242);
-            this.btnRekapData.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnRekapData.Name = "btnRekapData";
-            this.btnRekapData.Size = new System.Drawing.Size(135, 46);
-            this.btnRekapData.TabIndex = 28;
-            this.btnRekapData.Text = "Rekap Data";
-            this.btnRekapData.UseVisualStyleBackColor = true;
             // 
             // FormMahasiswa
             // 
