@@ -36,12 +36,10 @@ namespace CRUDMahasiswaADO
             };
 
             isInitializing = true;
-
             cmbTipe.DataSource = items;
             cmbTipe.DisplayMember = "Key";
             cmbTipe.ValueMember = "Value";
             cmbTipe.SelectedIndex = 0;
-
             isInitializing = false;
 
             loadDataChart();
@@ -49,121 +47,99 @@ namespace CRUDMahasiswaADO
 
         public void loadDataChart()
         {
-            chartProdi.Series.Clear();
-            chartProdi.Titles.Clear();
-            chartProdi.Legends.Clear();
-            chartProdi.ChartAreas.Clear();
-
-            ChartArea ca = new ChartArea("MainArea");
-            ca.AxisX.Title = "Program Studi";
-            ca.AxisY.Title = "Jumlah Mahasiswa";
-            ca.AxisX.LabelStyle.Angle = -45;
-            ca.BackColor = Color.Transparent;
-
-            chartProdi.ChartAreas.Add(ca);
-
             try
             {
+                chartProdi.Series.Clear();
+                chartProdi.Titles.Clear();
+                chartProdi.Legends.Clear();
+                chartProdi.ChartAreas.Clear();
+
+                ChartArea ca = new ChartArea("MainArea");
+                ca.AxisX.Title = "Program Studi";
+                ca.AxisY.Title = "Jumlah Mahasiswa";
+                ca.AxisX.LabelStyle.Angle = -45;
+                ca.BackColor = Color.Transparent;
+                chartProdi.ChartAreas.Add(ca);
+
                 if (button == 1)
-                {
-                    dt = dbLogic.getDataChartBytahun(dtpTanggalMasuk.Value);
-                }
+                    dt = dbLogic.GetDataChartByTahun(dtpTanggalMasuk.Value);
                 else
+                    dt = dbLogic.GetAllDataChart();
+
+                if (dt == null || dt.Rows.Count == 0)
                 {
-                    dt = dbLogic.getAllDataChart();
+                    MessageBox.Show("Tidak ada data untuk ditampilkan", "Info",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
 
-                SeriesChartType tipe =
-                    (SeriesChartType)cmbTipe.SelectedValue;
+                SeriesChartType tipe = (SeriesChartType)cmbTipe.SelectedValue;
 
-                if (tipe == SeriesChartType.Column)
+                Series s = new Series("Mahasiswa");
+                s.ChartType = tipe;
+                s.IsValueShownAsLabel = true;
+                s.Label = "#VAL";
+
+                foreach (DataRow row in dt.Rows)
                 {
-                    Series s = new Series("Mahasiswa");
-                    s.ChartType = SeriesChartType.Column;
-
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        string prodi = row["NamaProdi"].ToString();
-                        int jumlah = Convert.ToInt32(row["JmlhMhs"]);
-
-                        s.Points.AddXY(prodi, jumlah);
-                    }
-
-                    chartProdi.Series.Add(s);
+                    string prodi = row["NamaProdi"].ToString();
+                    int jumlah = Convert.ToInt32(row["JmlMhs"]); // PAKAI JmlMhs
+                    s.Points.AddXY(prodi, jumlah);
                 }
-                else
-                {
-                    Series s = new Series("Jumlah Mahasiswa");
 
-                    s.ChartType = tipe;
-                    s.IsValueShownAsLabel = true;
-                    s.Label = "#VAL";
-                    s.LegendText = "#VALX";
+                chartProdi.Series.Add(s);
 
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        string prodi = row["NamaProdi"].ToString();
-                        int jumlah = Convert.ToInt32((long)row["JmlhMhs"]);
+                Title title = new Title(
+                    "Jumlah Mahasiswa per Program Studi",
+                    Docking.Top,
+                    new Font("Arial", 14, FontStyle.Bold),
+                    Color.DarkBlue);
+                chartProdi.Titles.Add(title);
 
-                        s.Points.AddXY(prodi, jumlah);
-                    }
-
-                    chartProdi.Series.Add(s);
-                }
+                Legend legend = new Legend("MainLegend");
+                legend.Docking = Docking.Right;
+                chartProdi.Legends.Add(legend);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Gagal load data : " + ex.Message);
+                MessageBox.Show("Gagal load chart: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            Title title = new Title(
-                "Jumlah Mahasiswa per Program Studi",
-                Docking.Top,
-                new Font("Arial", 14, FontStyle.Bold),
-                Color.DarkBlue);
-
-            chartProdi.Titles.Add(title);
-
-            Legend legend = new Legend("MainLegend");
-            legend.Docking = Docking.Right;
-
-            chartProdi.Legends.Add(legend);
         }
 
         private void cmbTipe_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (isInitializing)
-                return;
-
-            if (button == 1)
-            {
-
-            }
-            else
-            {
-                loadDataChart();
-            }
+            if (isInitializing) return;
+            loadDataChart();
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
             button = 1;
             loadDataChart();
+            MessageBox.Show("Data berhasil dimuat!", "Informasi",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
             button = 0;
             loadDataChart();
+            MessageBox.Show("Data berhasil direset!", "Informasi",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnDataMahasiswa_Click(object sender, EventArgs e)
         {
-            FormMahasiswa frm1 = new FormMahasiswa();
-
-            frm1.Show();
-
+            FormMahasiswa frm = new FormMahasiswa();
+            frm.Show();
             this.Hide();
+        }
+
+        private void btnRekapData_Click(object sender, EventArgs e)
+        {
+            RekapData frm = new RekapData();
+            frm.ShowDialog();
         }
     }
 }

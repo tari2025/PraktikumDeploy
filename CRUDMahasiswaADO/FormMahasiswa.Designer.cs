@@ -63,6 +63,7 @@ namespace CRUDMahasiswaADO
             this.btnImportDatabase = new System.Windows.Forms.Button();
             this.btnImportExcel = new System.Windows.Forms.Button();
             this.grpFoto = new System.Windows.Forms.GroupBox();
+            this.btnRekapData = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
@@ -294,10 +295,10 @@ namespace CRUDMahasiswaADO
             // pictureBoxFoto
             // 
             this.pictureBoxFoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxFoto.Location = new System.Drawing.Point(30, 62);
+            this.pictureBoxFoto.Location = new System.Drawing.Point(55, 0);
             this.pictureBoxFoto.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBoxFoto.Name = "pictureBoxFoto";
-            this.pictureBoxFoto.Size = new System.Drawing.Size(179, 184);
+            this.pictureBoxFoto.Size = new System.Drawing.Size(143, 148);
             this.pictureBoxFoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxFoto.TabIndex = 16;
             this.pictureBoxFoto.TabStop = false;
@@ -394,18 +395,18 @@ namespace CRUDMahasiswaADO
             // 
             // btnRekap
             // 
-            this.btnRekap.Location = new System.Drawing.Point(465, 31);
-            this.btnRekap.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnRekap.Name = "btnRekap";
-            this.btnRekap.Size = new System.Drawing.Size(135, 46);
-            this.btnRekap.TabIndex = 25;
-            this.btnRekap.Text = "Rekap";
-            this.btnRekap.UseVisualStyleBackColor = true;
-            this.btnRekap.Click += new System.EventHandler(this.btnRekap_Click);
+            this.btnRekapData.Location = new System.Drawing.Point(465, 31);
+            this.btnRekapData.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnRekapData.Name = "btnRekapData";
+            this.btnRekapData.Size = new System.Drawing.Size(135, 46);
+            this.btnRekapData.TabIndex = 25;
+            this.btnRekapData.Text = "Rekap";
+            this.btnRekapData.UseVisualStyleBackColor = true;
+            this.btnRekapData.Click += new System.EventHandler(this.btnRekapData_Click);
             // 
             // btnUploadFoto
             // 
-            this.btnUploadFoto.Location = new System.Drawing.Point(30, 262);
+            this.btnUploadFoto.Location = new System.Drawing.Point(30, 185);
             this.btnUploadFoto.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnUploadFoto.Name = "btnUploadFoto";
             this.btnUploadFoto.Size = new System.Drawing.Size(120, 38);
@@ -449,7 +450,7 @@ namespace CRUDMahasiswaADO
             this.grpButton.Controls.Add(this.btnResetData);
             this.grpButton.Controls.Add(this.btnTestInjection);
             this.grpButton.Controls.Add(this.btnRefresh);
-            this.grpButton.Controls.Add(this.btnRekap);
+            this.grpButton.Controls.Add(this.btnRekapData);
             this.grpButton.Location = new System.Drawing.Point(810, 46);
             this.grpButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.grpButton.Name = "grpButton";
@@ -484,6 +485,7 @@ namespace CRUDMahasiswaADO
             // 
             // grpFoto
             // 
+            this.grpFoto.Controls.Add(this.btnRekapData);
             this.grpFoto.Controls.Add(this.pictureBoxFoto);
             this.grpFoto.Controls.Add(this.btnUploadFoto);
             this.grpFoto.Location = new System.Drawing.Point(555, 46);
@@ -494,6 +496,18 @@ namespace CRUDMahasiswaADO
             this.grpFoto.TabIndex = 29;
             this.grpFoto.TabStop = false;
             this.grpFoto.Text = "Foto";
+            this.grpFoto.Enter += new System.EventHandler(this.grpFoto_Enter);
+            // 
+            // btnRekapData
+            // 
+            this.btnRekapData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRekapData.Location = new System.Drawing.Point(30, 242);
+            this.btnRekapData.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnRekapData.Name = "btnRekapData";
+            this.btnRekapData.Size = new System.Drawing.Size(135, 46);
+            this.btnRekapData.TabIndex = 28;
+            this.btnRekapData.Text = "Rekap Data";
+            this.btnRekapData.UseVisualStyleBackColor = true;
             // 
             // FormMahasiswa
             // 
@@ -575,6 +589,6 @@ namespace CRUDMahasiswaADO
         private System.Windows.Forms.GroupBox grpButton;
         private System.Windows.Forms.Button btnImportDatabase;
         private System.Windows.Forms.Button btnImportExcel;
-
+        private Button btnRekapData;
     }
 }

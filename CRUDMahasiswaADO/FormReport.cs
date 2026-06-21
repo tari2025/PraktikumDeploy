@@ -39,14 +39,18 @@ namespace CRUDMahasiswaADO
                 ReportDocument report = new ReportDocument();
 
                 string reportPath = System.IO.Path.Combine(
-                    Application.StartupPath,
-                    "PABD.rpt"
-                );
+                Application.StartupPath,
+                "FormCrystalReport.rpt"
+            );
 
                 //MessageBox.Show("Path Report:\n" + reportPath);
-
+               
                 report.Load(reportPath);
-
+                MessageBox.Show(
+                "Report Path:\n" + reportPath +
+                "\n\nFile Exists = " +
+                System.IO.File.Exists(reportPath)
+            );
                 report.SetDataSource(ds.Tables[0]);
 
                 crystalReportViewer1.ReportSource = report;

@@ -23,6 +23,9 @@ namespace CRUDMahasiswaADO
             bindingNavigator1.BindingSource = bindingSource;
             ClearForm();
 
+            btnRekapData.Enabled = true;
+            btnRekapData.Visible = true;
+
             btnImportExcel.Enabled = true;
             btnImportDatabase.Enabled = true;
             btnImportExcel.Visible = true;
@@ -229,7 +232,7 @@ namespace CRUDMahasiswaADO
                 }
 
                 // ✅ PAKAI FOTO
-                dbLogic.inserMhs(
+                dbLogic.InsertMhs(
                     txtNIM.Text,
                     txtNama.Text,
                     txtAlamat.Text,
@@ -265,7 +268,7 @@ namespace CRUDMahasiswaADO
                 }
 
                 // ✅ PAKAI FOTO
-                dbLogic.updateMhs(
+                dbLogic.UpdateMhs(
                     txtNIM.Text,
                     txtNama.Text,
                     txtAlamat.Text,
@@ -306,7 +309,7 @@ namespace CRUDMahasiswaADO
             {
                 try
                 {
-                    dbLogic.deleteMhs(txtNIM.Text);
+                    dbLogic.DeleteMhs(txtNIM.Text);
 
                     MessageBox.Show("Data berhasil dihapus!", "Sukses",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -392,35 +395,11 @@ namespace CRUDMahasiswaADO
             ClearForm();
         }
 
-        private void btnRekap_Click(object sender, EventArgs e)
+        private void btnRekapData_Click(object sender, EventArgs e)
         {
-            try
-            {
-                DataTable dtRekap = dbLogic.getAllDataChart();
-
-                if (dtRekap.Rows.Count > 0)
-                {
-                    string rekapMessage = "=== REKAP DATA MAHASISWA ===\n\n";
-                    foreach (DataRow row in dtRekap.Rows)
-                    {
-                        rekapMessage += $"Prodi: {row["NamaProdi"]} - Jumlah: {row["JmlhMhs"]} Mahasiswa\n";
-                    }
-                    rekapMessage += $"\nTotal Mahasiswa: {dbLogic.CountMhs()}";
-
-                    MessageBox.Show(rekapMessage, "Rekap Data",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Belum ada data untuk direkap!", "Info",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            RekapData frm = new RekapData();
+            frm.Show();
+            this.Hide();
         }
 
         // ==========================================
@@ -532,6 +511,11 @@ namespace CRUDMahasiswaADO
         }
 
         private void grpInput_Enter(object sender, EventArgs e)
+        {
+
+        }
+        
+        private void grpFoto_Enter(object sender, EventArgs e)
         {
 
         }

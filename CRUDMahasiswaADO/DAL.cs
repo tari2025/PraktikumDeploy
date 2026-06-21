@@ -17,6 +17,7 @@ namespace CRUDMahasiswaADO
         public DAL()
         {
             conn = new SqlConnection(connectionString);
+            ExcelPackage.License.SetNonCommercialPersonal("Nama Mahasiswa");
         }
 
         public string GetConnectionString()
@@ -115,7 +116,7 @@ namespace CRUDMahasiswaADO
         }
 
         // ==========================================
-        // INSERT MAHASISWA - DENGAN FOTO
+        // INSERT MAHASISWA
         // ==========================================
         public void InsertMhs(string nim, string nama, string alamat, string jenisKelamin,
             DateTime tanggalLahir, string kodeProdi, byte[] foto)
@@ -134,11 +135,9 @@ namespace CRUDMahasiswaADO
                 cmd.Parameters.AddWithValue("@pTanggalLahir", tanggalLahir);
                 cmd.Parameters.AddWithValue("@pKodeProdi", kodeProdi);
 
-                // HANDLE FOTO NULL
-                if (foto == null)
-                    cmd.Parameters.AddWithValue("@pFoto", DBNull.Value);
-                else
-                    cmd.Parameters.AddWithValue("@pFoto", foto);
+                SqlParameter fotoParam = new SqlParameter("@pFoto", SqlDbType.VarBinary);
+                fotoParam.Value = (foto != null) ? (object)foto : DBNull.Value;
+                cmd.Parameters.Add(fotoParam);
 
                 cmd.ExecuteNonQuery();
             }
@@ -153,7 +152,7 @@ namespace CRUDMahasiswaADO
         }
 
         // ==========================================
-        // UPDATE MAHASISWA - DENGAN FOTO
+        // UPDATE MAHASISWA
         // ==========================================
         public void UpdateMhs(string nim, string nama, string alamat, string jenisKelamin,
             DateTime tanggalLahir, string kodeProdi, byte[] foto)
@@ -172,11 +171,9 @@ namespace CRUDMahasiswaADO
                 cmd.Parameters.AddWithValue("@pTanggalLahir", tanggalLahir);
                 cmd.Parameters.AddWithValue("@pKodeProdi", kodeProdi);
 
-                // HANDLE FOTO NULL
-                if (foto == null)
-                    cmd.Parameters.AddWithValue("@pFoto", DBNull.Value);
-                else
-                    cmd.Parameters.AddWithValue("@pFoto", foto);
+                SqlParameter fotoParam = new SqlParameter("@pFoto", SqlDbType.VarBinary);
+                fotoParam.Value = (foto != null) ? (object)foto : DBNull.Value;
+                cmd.Parameters.Add(fotoParam);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 
@@ -234,7 +231,6 @@ namespace CRUDMahasiswaADO
             {
                 OpenConnection();
 
-                // CEK APAKAH TABEL BACKUP ADA
                 SqlCommand cmdCheck = new SqlCommand(
                     "SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[mahasiswa_backup]') AND type in (N'U')",
                     conn);
@@ -284,8 +280,7 @@ namespace CRUDMahasiswaADO
         {
             try
             {
-                // SET LICENSE UNTUK EPPLUS
-                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                ExcelPackage.License.SetNonCommercialPersonal("Nama Mahasiswa");
 
                 using (var package = new ExcelPackage(new FileInfo(filePath)))
                 {
@@ -323,7 +318,6 @@ namespace CRUDMahasiswaADO
                                     continue;
                                 }
 
-                                // CEK APAKAH NIM SUDAH ADA
                                 string checkQuery = "SELECT COUNT(*) FROM Mahasiswa WHERE NIM = @NIM";
                                 SqlCommand cmdCheck = new SqlCommand(checkQuery, conn, transaction);
                                 cmdCheck.Parameters.AddWithValue("@NIM", nim);
@@ -331,7 +325,6 @@ namespace CRUDMahasiswaADO
 
                                 if (exists > 0)
                                 {
-                                    // UPDATE
                                     string updateQuery = @"
                                         UPDATE Mahasiswa 
                                         SET Nama = @Nama, 
@@ -354,7 +347,6 @@ namespace CRUDMahasiswaADO
                                 }
                                 else
                                 {
-                                    // INSERT
                                     string insertQuery = @"
                                         INSERT INTO Mahasiswa (NIM, Nama, Alamat, JenisKelamin, TanggalLahir, KodeProdi, TanggalDaftar)
                                         VALUES (@NIM, @Nama, @Alamat, @JK, @TglLahir, @KodeProdi, GETDATE())";
@@ -417,7 +409,6 @@ namespace CRUDMahasiswaADO
 
                 try
                 {
-                    // CEK APAKAH TABEL BACKUP ADA
                     string checkBackup = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'mahasiswa_backup'";
                     SqlCommand cmdCheck = new SqlCommand(checkBackup, conn, transaction);
                     int backupExists = (int)cmdCheck.ExecuteScalar();
@@ -427,11 +418,9 @@ namespace CRUDMahasiswaADO
                         throw new Exception("Tabel mahasiswa_backup tidak ditemukan!");
                     }
 
-                    // HAPUS DATA LAMA
                     SqlCommand cmdDelete = new SqlCommand("DELETE FROM Mahasiswa", conn, transaction);
                     cmdDelete.ExecuteNonQuery();
 
-                    // IMPORT DARI BACKUP
                     SqlCommand cmdInsert = new SqlCommand("INSERT INTO Mahasiswa SELECT * FROM mahasiswa_backup", conn, transaction);
                     cmdInsert.ExecuteNonQuery();
 
@@ -485,7 +474,6 @@ namespace CRUDMahasiswaADO
             {
                 OpenConnection();
 
-                // BUAT TABEL LOG JIKA BELUM ADA
                 string createTable = @"
                     IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[LogActivity]') AND type in (N'U'))
                     BEGIN
@@ -499,7 +487,6 @@ namespace CRUDMahasiswaADO
                 SqlCommand cmdCreate = new SqlCommand(createTable, conn);
                 cmdCreate.ExecuteNonQuery();
 
-                // INSERT LOG
                 string insertLog = "INSERT INTO LogActivity (Pesan) VALUES (@psn)";
                 SqlCommand cmdInsert = new SqlCommand(insertLog, conn);
                 cmdInsert.Parameters.AddWithValue("@psn", message);
@@ -549,20 +536,10 @@ namespace CRUDMahasiswaADO
             {
                 OpenConnection();
 
-                string query = @"
-                    SELECT 
-                        Mahasiswa.NIM,
-                        Mahasiswa.Nama,
-                        ProgramStudi.NamaProdi,
-                        YEAR(Mahasiswa.TanggalDaftar) as TahunDaftar
-                    FROM Mahasiswa
-                    JOIN ProgramStudi ON Mahasiswa.KodeProdi = ProgramStudi.KodeProdi
-                    WHERE ProgramStudi.NamaProdi LIKE '%' + @inProdi + '%'
-                        AND YEAR(Mahasiswa.TanggalDaftar) = @inTglMsuk";
-
-                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand("sp_Report", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@inProdi", prodi);
-                cmd.Parameters.AddWithValue("@inTglMsuk", tanggalMasuk.Year.ToString());
+                cmd.Parameters.AddWithValue("@inTglMasuk", tanggalMasuk.Year.ToString());
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -609,20 +586,20 @@ namespace CRUDMahasiswaADO
         // ==========================================
         // GET DATA CHART BY TAHUN
         // ==========================================
-        public DataTable GetDataChartByTahun(DateTime thnMasuk)
+        public DataTable GetDataChartByTahun(DateTime tahun)
         {
+            DataTable dt = new DataTable();
+
             try
             {
                 OpenConnection();
 
-                SqlCommand cmd = new SqlCommand("sp_DashBoardBYTahun", conn);
+                SqlCommand cmd = new SqlCommand("sp_DashBoardByTahun", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@ingTglMsuk", thnMasuk.Year);
+                cmd.Parameters.AddWithValue("@inTglMsuk", tahun.Year);
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
                 da.Fill(dt);
-                return dt;
             }
             catch (Exception ex)
             {
@@ -632,17 +609,13 @@ namespace CRUDMahasiswaADO
             {
                 CloseConnection();
             }
+
+            return dt;
         }
 
         // ==========================================
         // METHOD KOMPATIBILITAS (HURUF KECIL)
         // ==========================================
-        public void inserMhs(string nim, string nama, string alamat, string jenisKelamin,
-            DateTime tanggalLahir, string kodeProdi, byte[] foto)
-        {
-            InsertMhs(nim, nama, alamat, jenisKelamin, tanggalLahir, kodeProdi, foto);
-        }
-
         public void updateMhs(string nim, string nama, string alamat, string jenisKelamin,
             DateTime tanggalLahir, string kodeProdi, byte[] foto)
         {
@@ -681,7 +654,31 @@ namespace CRUDMahasiswaADO
 
         public DataTable getAllDataChart()
         {
-            return GetAllDataChart();
+            try
+            {
+                OpenConnection();
+
+                SqlCommand cmd = new SqlCommand(
+                    @"SELECT p.NamaProdi, COUNT(m.NIM) AS JmlhMhs
+                      FROM Prodi p
+                      LEFT JOIN Mahasiswa m ON p.KodeProdi = m.KodeProdi
+                      GROUP BY p.NamaProdi
+                      ORDER BY p.NamaProdi", conn);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error getAllDataChart: " + ex.Message);
+            }
+            finally
+            {
+                CloseConnection();
+            }
         }
 
         public DataTable getDataChartBytahun(DateTime thnMasuk)
